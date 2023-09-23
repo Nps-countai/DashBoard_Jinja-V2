@@ -10,3 +10,4 @@ Controller Status
 display: flex; 
     gap: 10px;
     {% if not loop.first %} margin-left: 10rem;{% endif %} gap:10rem;
+    pd.read_csv('new.csv'),

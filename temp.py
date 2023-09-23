@@ -16,8 +16,9 @@ logging.basicConfig(filename="dashBoard_log.log", level=logging.INFO)
 templates = Jinja2Templates(directory="templates") 
 
 # last hr time
-last_hour_date_time = datetime.now() - timedelta(minutes= 1)
+last_hour_date_time = datetime.now() - timedelta(hours= 1)
 lh_time = last_hour_date_time.strftime('%Y-%m-%d %H:%M:%S')
+
 
 # app starting
 app = FastAPI()
@@ -50,6 +51,13 @@ async def read_performance(request: Request):
     logging.info('User Refreshed Performance At: '+str(datetime.now())+'Data Has been updated')
     return templates.TemplateResponse("performance.html", {"request": request})
 
+# Table view
+@app.get("/tableview", response_class=HTMLResponse)
+async def read_performance(request: Request):
+    logging.info('User Refreshed Performance At: '+str(datetime.now())+'Data Has been updated')
+    return templates.TemplateResponse("tableview.html", {"request": request,
+                                                         "mills" : pd.read_csv('new.csv'),#updatedData(),
+                                                         "lh_time" : lh_time})
 
 # ModelAnalysis
 @app.get("/modelanalysis", response_class=HTMLResponse)
@@ -76,13 +84,7 @@ def get_chart(item_id: str,request: Request):
         "data":data}) 
 
 
-# @app.get("/chart", response_class=HTMLResponse)
-# async def get_chart(request: Request):
-#     labels = ['Category A', 'Category B', 'Category C']
-#     data = [random.randint(1, 10) for _ in labels]
-#     return templates.TemplateResponse("chart.html", {"request": request,
-#                                                      "labels":labels,
-#         "data":data})
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8088)

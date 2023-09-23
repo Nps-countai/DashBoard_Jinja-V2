@@ -18,6 +18,7 @@ def imageGenerator():
     unique_dates = df['timestamp'].dt.date.unique()
     date = unique_dates[-1] 
     user_date = date.strftime('%Y-%m-%d')
+    print(user_date)
     
     # data processing
     filtered_df = df[df['timestamp'].dt.date == pd.to_datetime(user_date).date()]
