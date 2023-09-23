@@ -66,7 +66,8 @@ def get_chart(item_id: str,request: Request):
     # data = [random.randint(1, 10) for _ in labels]
     uptime,LE,index,value = imageGenerator()
     print(type(index)," : ",type(value))
-    labels = list(index)
+    # labels = list(index)
+    labels = list(range(0, 25))
     data = np.array(value).tolist()
     print(type(labels)," : ",type(data[0]))
     return templates.TemplateResponse("chart.html", {
@@ -75,13 +76,13 @@ def get_chart(item_id: str,request: Request):
         "data":data}) 
 
 
-@app.get("/chart", response_class=HTMLResponse)
-async def get_chart(request: Request):
-    labels = ['Category A', 'Category B', 'Category C']
-    data = [random.randint(1, 10) for _ in labels]
-    return templates.TemplateResponse("chart.html", {"request": request,
-                                                     "labels":labels,
-        "data":data})
+# @app.get("/chart", response_class=HTMLResponse)
+# async def get_chart(request: Request):
+#     labels = ['Category A', 'Category B', 'Category C']
+#     data = [random.randint(1, 10) for _ in labels]
+#     return templates.TemplateResponse("chart.html", {"request": request,
+#                                                      "labels":labels,
+#         "data":data})
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8088)

@@ -1,0 +1,12 @@
+Uptime :
+Down Time
+Software Status
+Camera-1
+Camera-2
+Image-1
+Image-2
+Controller Status
+
+display: flex; 
+    gap: 10px;
+    {% if not loop.first %} margin-left: 10rem;{% endif %} gap:10rem;

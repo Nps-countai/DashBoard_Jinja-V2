@@ -6,15 +6,14 @@
 
 {% block content %}
     <h3>Total Number of Mills: {{ mills|length }}</h3>
-    <h3>{{Uptime}}</h3>
-    <h3>{{le}}</h3>
+    
 
     
 
     
     <div class="card-container" >
         {% for index, row in mills.iterrows() %}
-            <div class="card" style="width: 18rem;">
+            <div class="card" >
                 {% if le <= lh_time %}
 
                     <img src="{{ url_for('static', path='/Image/material-symbols-mode-off-on-2.svg') }}" class="card-img-top"
@@ -23,20 +22,42 @@
                     <img src="{{ url_for('static', path='/Image/material-symbols-mode-off-on-4.svg') }}" class="card-img-top"
                     alt="..." width="500" height="150">
                 {% endif %}      
-                <div class="card-body" >
-                    <h5 class="card-title" style="text-align: center;">{{ row["millName"] }}</h5>
-                    <p>Today's Count: {{ row["lastDay_totalCount"] }}</p>
-                    <p>Today's UV - Defect: {{ row["lastDay_uv_Defect"] }}</p>
-                    <p>Today's ConeTip - Defect: {{ row["lastDay_conetip_Defect"] }}</p>
-                    <p>Today's UV_Defect %:  {{ row["ldefectPercen_UV"] }}</p>
-                    <p>Today's CT_Defect %: {{ row["ldefectPercen_CT"] }}</p>
+                <div class="card-body"  > 
+                    <h5 class="card-title" style="text-align: center; padding-bottom:2rem;">{{ row["millName"] }}</h5>
                     
-                    <p class="card-text">Last inspection at: {{ row["lastuv_inspectionOn"] }}</p>
-                    <div style="margin: auto; width: 50%">
+                        <div class="container" >
+                            <div class="row">
+                              <div class="col"><p>Uptime : {{Uptime}} Mins</p></div>
+                              <div class="col"><p>Today's Count: {{ row["lastDay_totalCount"] }}</p></div>
+                              <div class="w-100"></div>
+                              <div class="col"><p>Down Time : {{1440 - Uptime}} Mins</p></div>
+                              <div class="col"><p>Today's UV - Defect: {{ row["lastDay_uv_Defect"] }}</p></div>
+                              <div class="w-100"></div>
+                              <div class="col"><p>Software Status : OFF</p></div>
+                              <div class="col"><p>Today's ConeTip - Defect: {{ row["lastDay_conetip_Defect"] }}</p></div>
+                              <div class="w-100"></div>
+                              <div class="col"><p>Camera-1 : OFF</p></div>
+                              <div class="col"><p>Today's UV_Defect %:  {{ row["ldefectPercen_UV"] }}</p></div>
+                              <div class="w-100"></div>
+                              <div class="col"><p>Camera-2 : OFF</p></div>
+                              <div class="col"><p>Today's CT_Defect %: {{ row["ldefectPercen_CT"] }}</p>   </div>
+                              <div class="w-100"></div>
+                              <div class="col"><p>Image-1 : OFF</p></div>
+                              <div class="col"><p class="card-text">Last inspection at: {{ row["lastuv_inspectionOn"] }}</p></div>
+                              <div class="w-100"></div>
+                              <div class="col"><p>Image-2 : OFF</p></div>
+                              <div class="col"></div>
+                              <div class="w-100"></div>
+                              <div class="col"><p>Controller Status : OFF</p></div>
+                              <div class="col"></div>
+                            </div>
+                          </div>
+                    
+                    <div style="display: flex;justify-content: space-between;">
                         <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasBottom{{ index }}" aria-controls="offcanvasBottom{{ index }}" >View Mill Details</button>
                         <a href="/uptime/{{ row["millName"] }}">
-                            <button href="/uptime/{{ row["millName"] }}" class="btn btn-primary" type="button" id="customButton{{ index }}">Custom Button</button>
+                            <button href="/uptime/{{ row["millName"] }}" class="btn btn-primary" type="button" id="customButton{{ index }}">CurrentDay Uptime</button>
                         </a>
                     </div>
                     
