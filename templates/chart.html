@@ -1,0 +1,53 @@
+<!-- templates/chart.html (HTML template with chart placeholder) -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bar Chart Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+</head>
+<body>
+    <!-- Add an empty canvas for the chart -->
+    
+    <canvas id="myChart" width="400" height="200"></canvas>
+
+    <h1>{{data}}</h1>
+    <h1>{{labels}}</h1>
+
+   
+
+    <script>
+        // Get a reference to the canvas element
+        var canvas = document.getElementById('myChart');
+      
+        // Define the data for your chart
+        var chartData = {
+          labels: {{ labels|tojson }},
+          datasets: [{
+            label: 'Bar Chart',
+            data: {{ data|tojson }},
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+          }]
+        };
+      
+        // Define chart options (optional)
+        var chartOptions = {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        };
+      
+        // Create a new chart on the canvas
+        var myChart = new Chart(canvas, {
+          type: 'bar',
+          data: chartData,
+          options: chartOptions
+        });
+      </script>
+      
+</body>
+</html>
