@@ -7,7 +7,6 @@ import pandas as pd
 from datetime import datetime, timedelta
 import time
 import random
-from dataLoader import updatedData
 import logging
 from uptimeimage import imageGenerator
 import numpy as np
@@ -87,5 +86,5 @@ def get_chart(item_id: str,request: Request):
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8088)
+    uvicorn.run(app, host="127.0.0.1", port=8089)
 

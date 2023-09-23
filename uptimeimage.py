@@ -18,7 +18,7 @@ def imageGenerator():
     unique_dates = df['timestamp'].dt.date.unique()
     date = unique_dates[-1] 
     user_date = date.strftime('%Y-%m-%d')
-    print(user_date)
+    # print(user_date)
     
     # data processing
     filtered_df = df[df['timestamp'].dt.date == pd.to_datetime(user_date).date()]
@@ -28,7 +28,7 @@ def imageGenerator():
 
     # Convert the count to minutes
     hourly_running_time = hourly_running_time.where(hourly_running_time <= 60, 60)
-    print(hourly_running_time.sum()," Mins")
+    # print(hourly_running_time.sum()," Mins")
     return hourly_running_time.sum(),lastEntry, hourly_running_time.index, hourly_running_time.values
     
 

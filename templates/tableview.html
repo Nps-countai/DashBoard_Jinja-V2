@@ -18,7 +18,8 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Mill Name</th>
-            <th scope="col">Status</th>
+            <th scope="col">Machine Status</th>
+            <th scope="col">Alarm Status</th>
             <th scope="col">Today's Count</th>
             <th scope="col">Today's UV - Defect</th>
             <th scope="col">Today's ConeTip - Defect</th>
@@ -35,10 +36,19 @@
                     <td>
                         {% if row["lastuv_inspectionOn"] <= lh_time %}
                         <img src="{{ url_for('static', path='/Image/material-symbols-mode-off-on-2.svg') }}" class="card-img-top"
-                            alt="..." width="20" height="20">
+                            alt="..." width="40" height="40">
                         {% else %}
                             <img src="{{ url_for('static', path='/Image/material-symbols-mode-off-on-4.svg') }}" class="card-img-top"
-                            alt="..." width="20" height="20">
+                            alt="..." width="40" height="40">
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if row["alarm_st"] == 0 %}
+                            <button type="button" class="btn btn-success">
+                                Off <span class="badge bg-success"></span>
+                        {% else %}
+                            <button type="button" class="btn btn-danger">
+                                ON <span class="badge bg-danger"></span>
                         {% endif %}
                     </td>
                     <td>{{ row["lastDay_totalCount"] }}</td>
@@ -52,7 +62,12 @@
         </tbody>
       </table>
     {% include "footer.html" %}
-
+    <script>
+        setTimeout(function () {
+            location.reload();
+        }, 10000);  // 10000 milliseconds = 10 seconds
+       
+    </script>
    
 </body>
 </html>
